@@ -43,21 +43,25 @@ io.on('connection', (socket) => { console.log("user connected"); });
 // });
 
 app.post('/someEndPoint', (req, res) => {
-	console.log(req.body.message);
-	console.log(req.body.language);
+	// console.log(req.body.message);
+	// console.log(req.body.language);
+	let errMsg = "";
+	let stdErrMsg = "";
 	if (req.body.language === "python") {
 		let fileName = "main.py"
 		fs.writeFileSync(`${compileCacheDir}/${fileName}`, req.body.message);
 		exec(`python3 ${compileCacheDir}/${fileName}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
-				return;
+				errMsg = error.message;
+				// return;
 			}
 			if (stderr) {
 				console.log(`stderr: ${stderr}`);
-				return;
+				stdErrMsg = stderr;
+				// return;
 			}
-			res.send({ message: stdout });
+			res.send({ message: stdout, error: errMsg, stderr: stdErrMsg });
 
 		});
 	}
@@ -67,13 +71,15 @@ app.post('/someEndPoint', (req, res) => {
 		exec(`node ${compileCacheDir}/${fileName}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
-				return;
+				errMsg = error.message;
+				// return;
 			}
 			if (stderr) {
 				console.log(`stderr: ${stderr}`);
-				return;
+				stdErrMsg = stderr;
+				// return;
 			}
-			res.send({ message: stdout });
+			res.send({ message: stdout, error: errMsg, stderr: stdErrMsg });
 
 		});
 	}
@@ -83,21 +89,23 @@ app.post('/someEndPoint', (req, res) => {
 		exec(`gcc -o ${compileCacheDir}/main ${compileCacheDir}/${fileName}`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
-				return;
+				errMsg = error.message;
+				// return;
 			}
 			if (stderr) {
 				console.log(`stderr: ${stderr}`);
-				return;
+				stdErrMsg = stderr;
+				// return;
 			}
 		});
 		execFile(`${compileCacheDir}/main`, (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
-				return;
+				// return;
 			}
 			if (stderr) {
 				console.log(`stderr: ${stderr}`);
-				return;
+				// return;
 			}
 			res.send({ message: stdout });
 		})
