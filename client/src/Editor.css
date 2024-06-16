@@ -1,0 +1,41 @@
+.op-err-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.op-wrapper {
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    width: 50%;
+    height: 8rem;
+    border-radius: 10px;
+    background-color: rgb(47, 47, 47);
+    color: white;
+}
+.err-wrapper {
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    width: 50%;
+    height: 8rem;
+    border-radius: 10px;
+    background-color: rgb(47, 47, 47);
+    color: red;
+
+}
+
+.compile-btn {
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+    width: 20%;
+    height: 2rem;
+    border-radius: 5px;
+    background-color: rgb(47, 47, 47);
+    color: white;
+    cursor: pointer;
+}
+
+.editor-footer {
+    font-family: 'Roboto Mono', monospace;
+}
