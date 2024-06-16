@@ -2,6 +2,60 @@ import React, { useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 import { useState } from 'react';
 import './Editor.css';
+import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { blueGrey, yellow } from '@mui/material/colors';
+import Drawer from './SelectComponent';
+
+// function BasicSelect() {
+//     const [age, setAge] = React.useState('');
+
+//     const languageOptions = [
+//         { value: 'python', label: 'Python' },
+//         { value: 'javascript', label: 'JavaScript' },
+//         { value: 'java', label: 'Java' },
+//         { value: 'c', label: 'C' },
+//         // Add more language options as needed
+//     ];
+//     const handleChange = (event) => {
+//         setAge(event.target.value);
+//     };
+
+//     return (
+//         <Box sx={{ minWidth: 120 }}>
+//             <FormControl fullWidth>
+//                 <InputLabel id="demo-simple-select-label">Age</InputLabel>
+//                 <Select
+//                     labelId="demo-simple-select-label"
+//                     id="demo-simple-select"
+//                     value={age}
+//                     label="Age"
+//                     onChange={handleChange}
+//                 >
+//                     {languageOptions.map((option) => (
+//                         <MenuItem value={option.value}>
+//                             {option.label}
+//                         </MenuItem>
+//                     ))}
+//                     {/* <MenuItem value={10}>Ten</MenuItem>
+//                     <MenuItem value={20}>Twenty</MenuItem>
+//                     <MenuItem value={30}>Thirty</MenuItem> */}
+//                 </Select>
+//             </FormControl>
+//         </Box>
+//     );
+// }
+
+const theme = createTheme({
+    palette: {
+        primary: blueGrey,
+        secondary: yellow
+    },
+});
 
 const MyEditor = () => {
 
@@ -49,13 +103,37 @@ const MyEditor = () => {
     return (
         <>
             <div>
-                <select value={language} onChange={handleLanguageChange}>
+                <div className='editor-header'>
+                    <ThemeProvider theme={theme}>
+                        <Box className="lang-select-box" >
+                            <FormControl >
+                                <InputLabel id="demo-simple-select-label">Language</InputLabel>
+                                <Select
+                                    labelId="lang-select"
+                                    id="lang-select"
+                                    value={language}
+                                    label="Select Language"
+                                    onChange={handleLanguageChange}
+                                >
+                                    {languageOptions.map((option) => (
+                                        <MenuItem value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </ThemeProvider>
+                    <div className='divider'></div>
+                    <Drawer className='menu-drawer' />
+                </div>
+                {/* <select value={language} onChange={handleLanguageChange}>
                     {languageOptions.map((option) => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
                     ))}
-                </select>
+                </select> */}
                 <Editor
                     height='70vh'
                     language={language}

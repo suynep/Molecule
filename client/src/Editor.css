@@ -24,6 +24,34 @@
     color: red;
 
 }
+.editor-header{
+    display: flex;
+    gap: 1rem;
+}
+.lang-select-box{
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    width: 50%;
+    /* height: 8rem; */
+    border-radius: 10px;
+    /* background-color: rgb(47, 47, 47);
+    color: white; */
+}
+.divider {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+}
+.menu-drawer{
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    width: 40%;
+    height: 8rem;
+    border-radius: 10px;
+
+}
 
 .compile-btn {
     margin-bottom: 1em;
