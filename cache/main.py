@@ -1,1 +1,1 @@
-prinft("Hello, World!")
+prifnt("Hello, World!")

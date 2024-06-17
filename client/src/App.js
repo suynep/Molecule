@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './Home';
 import EditorPage from './Editor';
@@ -26,6 +26,8 @@ function App() {
                         path="/editor/:roomId"
                         element={<EditorPage />}
                     ></Route>
+                    <Route path="/os-check" element={<Navigate push to="/importCheck.html" />}></Route>
+
                 </Routes>
             </BrowserRouter>
         </>

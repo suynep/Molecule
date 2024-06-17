@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { blueGrey, yellow } from '@mui/material/colors';
 import Drawer from './SelectComponent';
+import LogoComponent from './LogoComponent';
 
 // function BasicSelect() {
 //     const [age, setAge] = React.useState('');
@@ -50,12 +51,12 @@ import Drawer from './SelectComponent';
 //     );
 // }
 
-const theme = createTheme({
-    palette: {
-        primary: blueGrey,
-        secondary: yellow
-    },
-});
+// const theme = createTheme({
+//     palette: {
+//         primary: blueGrey,
+//         secondary: yellow
+//     },
+// });
 
 const MyEditor = () => {
 
@@ -102,9 +103,9 @@ const MyEditor = () => {
 
     return (
         <>
-            <div>
+            <div className='whole-wrapper'>
                 <div className='editor-header'>
-                    <ThemeProvider theme={theme}>
+                        <LogoComponent />
                         <Box className="lang-select-box" >
                             <FormControl >
                                 <InputLabel id="demo-simple-select-label">Language</InputLabel>
@@ -123,7 +124,6 @@ const MyEditor = () => {
                                 </Select>
                             </FormControl>
                         </Box>
-                    </ThemeProvider>
                     <div className='divider'></div>
                     <Drawer className='menu-drawer' />
                 </div>
