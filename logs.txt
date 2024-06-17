@@ -1,0 +1,9 @@
+COMMIT# , INFO
+[1] , Initial Commit: Added Basic UI Components in Home 
+[2] , Import Monaco Editor, Add Edit support
+[3] , Pipe <Editor State> to server-side Node Environment for further Parsing
+[4] , Add functionalities for compiler 
+[5] , Compilation + Error Handling
+[6] , Collaborative Aspect, two-user collaboration support
+[7] , create group rooms --> multiple user collaboration support
+[7] , Chat Funcionality
