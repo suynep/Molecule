@@ -7,8 +7,15 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { Link } from 'react-router-dom';
+import { socket } from './socket';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function AnchorTemporaryDrawer() {
+  const locationState = useLocation().state;
+  const path = useLocation().pathname;
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -32,8 +39,20 @@ export default function AnchorTemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'Chat', 'Debug!'].map((text) => (
-          <ListItem key={text} disablePadding>
+        {['Home', 'Chat', 'Debug'].map((text) => (
+          <ListItem key={text} onClick={() => {
+            if (text === 'Chat') {
+              socket.emit('chat-req', locationState.roomId, locationState.username);
+              console.log(path)
+              if (path !== `/editor/${locationState.roomId}/chat`) {
+                navigate(`/editor/${locationState.roomId}/chat`, {
+                  state: locationState
+                });
+              } else {
+                console.log('Already in chat')
+              }
+            }
+          }} disablePadding>
             <ListItemButton>
               <ListItemText primary={text} />
             </ListItemButton>

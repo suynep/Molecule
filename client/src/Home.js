@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { socket } from './socket';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -21,10 +22,12 @@ const Home = () => {
             return;
         }
 
+        socket.emit('joinRoom', roomId, username);
         // Redirect
         navigate(`/editor/${roomId}`, {
             state: {
                 username,
+                roomId,
             },
         });
     };
@@ -36,6 +39,7 @@ const Home = () => {
     };
     return (
         <div className="homePageWrapper">
+            <h1 className='homePageTitle'>Molecule</h1>
             <img
                 className="homePageLogo"
                 src={require("./logo.png")}

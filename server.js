@@ -10,8 +10,19 @@ const cors = require("cors");
 // const nordTheme = require("monaco-themes/themes/Nord.json");
 
 const app = express();
+app.use(cors({
+	origin: ["http://localhost:3000"],
+	methods: ["GET", "POST"],
+	credentials: true
+}));
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+	cors: {
+		origin: 'http://localhost:3000',
+		methods: ['GET', 'POST'],
+		credentials: true
+	}
+});
 const compileCacheDir = "./cache"
 const fileExtMap = {
 	"python": ".py",
@@ -30,17 +41,63 @@ if (!fs.existsSync(compileCacheDir)) {
 const port = 5555;
 
 app.use(express.json());
-app.use(cors());
 
-io.on('connection', (socket) => { console.log("user connected"); });
+io.on('connection', (socket) => {
+	console.log("user connected");
+
+	socket.on('searchDocs', (searchQuery, language) => {
+		console.log("searchDocs event received");
+		console.log(searchQuery);
+		console.log(language);
+
+		parseSearchQuery(searchQuery, language);
+	});
+
+	socket.on('joinRoom', (roomId) => {
+		socket.join(roomId);
+		console.log(`User joined room ${roomId}`);
+		socket.to(roomId).emit('userJoined', socket.id);
+	});
+
+	socket.on('changedEditorValue', (editorValue, roomId) => {
+		socket.to(roomId).emit('changedEditorValue', editorValue);
+		console.log("changedEditorValue event received");
+		console.log(io.sockets.adapter.rooms);
+	});
+
+	socket.on('sendChat', (message, username, roomId) => {
+		socket.to(roomId).emit('receive', { message: message, name: username });
+	});
+
+	socket.on('join-chat', (roomId, username) => {
+		socket.join(roomId);
+		socket.to(roomId).emit('user-joined', username);
+		console.log(io.sockets.adapter.rooms);
+	});
+
+	socket.on('left-chat', (username, roomId) => {
+		socket.to(roomId).emit('left', username);
+	});
+});
 
 
-// app.get('/someEndPoint', (req, res) => {
-// 	var data = {
-// 		"message": "Hello, World!"
-// 	};
-// 	res.send(res.json(data))
-// });
+function parseSearchQuery(searchQuery, language) {
+
+	if (language == 'python') {
+		exec(`python3 -m pydoc ${searchQuery}`, (error, stdout, stderr) => {
+			if (error) {
+				console.log(`error: ${error.message}`);
+				// return;
+			}
+			if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				// return;
+			}
+			io.emit('searchDocs', stdout);
+
+		});
+	}
+}
 
 app.post('/someEndPoint', (req, res) => {
 	// console.log(req.body.message);

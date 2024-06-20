@@ -8,6 +8,15 @@
     height: 100vh;
 }
 
+.homePageTitle {
+    font-family: "Playwrite CO", cursive;
+    font-optical-sizing: auto;
+    font-weight: regular;
+    font-style: bold;
+    text-align: center;
+    color: whitesmoke;
+}
+
 .formWrapper {
     background: #282a36;
     padding: 20px;

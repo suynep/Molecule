@@ -1,4 +1,3 @@
-
 /* .whole-wrapper {
     background-color: rgb(47, 47, 47);
 } */
@@ -6,34 +5,75 @@
 .op-err-wrapper {
     display: flex;
     gap: 1rem;
+    flex-flow: column;
+    flex: 50%;
 }
 
-.op-wrapper {
+.docs-wrapper {
     display: flex;
+    gap: 1rem;
+    flex-flow: row;
+}
+
+.doc-search {
+    display: flex;
+    gap: 1rem;
+    flex: 50%;
+}
+
+
+.editor-op-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.doc-op-wrapper {
+    display: inline-flex;
     padding: 5px;
     flex-direction: column;
     width: 50%;
+    min-height: 8rem;
+    height: auto;
+    border-radius: 10px;
+    background-color: rgb(47, 47, 47);
+    color: white;
+
+}
+
+.editor-wrapper {
+    display: flex;
+    width: 50%;
+}
+
+.op-wrapper {
+    /* display: flex; */
+    padding: 5px;
+    flex-direction: column;
+    flex: 50%;
     height: 8rem;
     border-radius: 10px;
     background-color: rgb(47, 47, 47);
     color: white;
 }
+
 .err-wrapper {
-    display: flex;
+    /* display: flex; */
     padding: 5px;
     flex-direction: column;
-    width: 50%;
+    flex: 50%;
     height: 8rem;
     border-radius: 10px;
     background-color: rgb(47, 47, 47);
     color: red;
 
 }
-.editor-header{
+
+.editor-header {
     display: flex;
     gap: 1rem;
 }
-.lang-select-box{
+
+.lang-select-box {
     display: flex;
     padding: 5px;
     flex-direction: column;
@@ -43,12 +83,14 @@
     /* background-color: rgb(47, 47, 47);
     color: white; */
 }
+
 .divider {
     display: flex;
     width: 100%;
     margin: 1rem 0;
 }
-.menu-drawer{
+
+.menu-drawer {
     display: flex;
     padding: 5px;
     flex-direction: column;
@@ -77,4 +119,29 @@
     background-color: rgb(25, 21, 248);
     border-radius: 5px;
     opacity: 0.6;
+}
+
+.search-dummy {
+    display: flex;
+    flex: 0 0 ;
+    max-height: 50px;
+    align-items: center;
+    background-color: rgb(243, 188, 188);
+    text-align: center;
+    color: rgb(157, 153, 153);
+}
+
+.op-text {
+    font-family: "Playwrite CO", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: large;
+    font-style: normal;
+}
+.err-text {
+    font-family: "Playwrite CO", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: large;
+    font-style: normal;
 }

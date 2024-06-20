@@ -1,5 +1,10 @@
 import { io } from 'socket.io-client';
 
-const url = 'httop://localhost:5555';
+const url = 'http://localhost:5555';
 
-export const socket = io(url);
+export const socket = io(url, {
+    withCredentials: true,
+    extraHeaders: {
+        "my-custom-header": "abcd"
+    }
+});
